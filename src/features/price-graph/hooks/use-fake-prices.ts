@@ -1,22 +1,20 @@
 import { useState } from 'react'
 import { UTCTimestamp } from 'lightweight-charts'
 import { useInterval } from 'shared/hooks/use-interval'
-import { AssetId } from 'shared/types'
+import { AssetId, Maybe } from 'shared/types'
 import { DATA_MULTIPLIER, QUERY_DATA_SIZE } from '../constants'
+import { ChartData, ChartPoint } from '../types'
 
 export const useFakePrices = () => {
   const date = new Date()
   const increment =
-    (QUERY_DATA_SIZE * DATA_MULTIPLIER +
-      date.getMinutes() +
-      date.getSeconds()) /
-    10
+    (QUERY_DATA_SIZE + date.getMinutes() + date.getSeconds()) / 100
   const [price, setPrice] = useState<number>(
-    getRandomBTCPrice(DATA_MULTIPLIER, increment)
+    getRandomBTCPrice(QUERY_DATA_SIZE, increment)
   )
 
   useInterval(() => {
-    setPrice(getRandomBTCPrice(DATA_MULTIPLIER, increment))
+    setPrice(getRandomBTCPrice(QUERY_DATA_SIZE, increment))
   }, 1000)
 
   return {
@@ -26,9 +24,8 @@ export const useFakePrices = () => {
   }
 }
 
-export function getFakeChartPrices() {
-  const now = Date.now()
-  const len = DATA_MULTIPLIER * QUERY_DATA_SIZE
+export function getFakeChartPrices(len = QUERY_DATA_SIZE) {
+  const now = Math.round(Date.now() / 1000)
 
   return {
     assetId: 'BTC' as AssetId,
@@ -41,4 +38,4 @@ export function getFakeChartPrices() {
 }
 
 export const getRandomBTCPrice = (divider = 1, increment = 0) =>
-  60000 + (60000 * (Math.random() - 0.5) * 0.01) / divider + increment
+  60000 + (60000 * (Math.random() - 0.5) * 0.005) / divider + increment
