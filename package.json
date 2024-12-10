@@ -14,8 +14,6 @@
     "build:dev": "vite build --mode development",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "preview": "vite preview",
-    "generate": "graphql-codegen",
-    "generate:watch": "graphql-codegen -w",
     "preview:test": "start-server-and-test preview http://localhost:4173",
     "test": "vitest",
     "test:ci": "vitest run",
