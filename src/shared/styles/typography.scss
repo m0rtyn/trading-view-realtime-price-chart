@@ -1,0 +1,34 @@
+.radix-themes {
+  /* TYPOGRAPHY ======== */
+  --default-font-family: poppins, sans-serif;
+  --default-font-size: 1.75rem;
+  --default-font-weight: var(--font-weight-medium);
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Monospaced font */
+  --code-font-family: 'inter', 'Menlo', 'Consolas (Custom)',
+    'Bitstream Vera Sans Mono', monospace, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --code-font-style: normal;
+  --code-font-weight: inherit;
+  --code-padding-top: 0.1em;
+  --code-padding-bottom: 0.1em;
+  --code-padding-left: 0.25em;
+  --code-padding-right: 0.25em;
+  // --code-font-size-adjust: 1;
+  // --code-letter-spacing: -0.007em;
+  font-variant-numeric: tabular-nums;
+
+  /* font-sizes */
+  --font-size-1: calc(1.5rem * var(--scaling));
+  --font-size-2: calc(1.75rem * var(--scaling));
+  --font-size-3: calc(2rem * var(--scaling));
+  --font-size-4: calc(2.25rem * var(--scaling));
+  --font-size-5: calc(2.5rem * var(--scaling));
+  --font-size-6: calc(3rem * var(--scaling));
+  --font-size-7: calc(3.5rem * var(--scaling));
+  --font-size-8: calc(4.5rem * var(--scaling));
+  --font-size-9: calc(7.5rem * var(--scaling));
+}

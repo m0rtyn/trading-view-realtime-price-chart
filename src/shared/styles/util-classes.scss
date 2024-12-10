@@ -1,0 +1,121 @@
+@import '/src/shared/styles/breakpoints';
+
+// COLORS
+.color-white.color-white.color-white {
+  color: var(--white);
+}
+
+.color-black.color-black.color-black {
+  color: var(--black);
+}
+
+.color-pink.color-pink.color-pink {
+  color: var(--pink);
+}
+
+.color-green.color-green.color-green {
+  color: var(--green);
+}
+
+.color-yellow.color-yellow.color-yellow {
+  color: var(--yellow);
+}
+
+.color-cyan.color-cyan.color-cyan {
+  color: var(--cyan);
+}
+
+.color-gray.color-gray.color-gray {
+  color: var(--gray);
+}
+.color-gray-light.color-gray-light.color-gray-light {
+  color: var(--gray-11);
+}
+.color-gray-dark.color-gray-dark.color-gray-dark {
+  color: var(--gray-7);
+}
+
+.color-setups.color-setups.color-setups {
+  color: var(--c-setups);
+}
+.color-rewards.color-rewards.color-rewards {
+  color: var(--c-rewards);
+}
+.color-up-down.color-up-down.color-up-down {
+  color: var(--c-up-down);
+}
+.color-bulls-eye.color-bulls-eye.color-bulls-eye {
+  color: var(--c-bulls-eye);
+}
+.color-one-vs-one.color-one-vs-one.color-one-vs-one {
+  color: var(--c-one-vs-one);
+}
+
+// BACKGROUND COLORS
+
+.background-gray.background-gray.background-gray {
+  background-color: var(--gray-9);
+}
+.background-gray-light.background-gray-light.background-gray-light {
+  background-color: var(--gray-11);
+}
+.background-gray-dark.background-gray-dark.background-gray-dark {
+  background-color: var(--gray-6);
+}
+
+.background-black.background-black.background-black {
+  background-color: var(--c-black);
+}
+
+// BORDER COLORS
+
+.border-green.border-green.border-green {
+  border-color: var(--green);
+}
+
+.border-pink.border-pink.border-pink {
+  border-color: var(--pink);
+}
+
+// MISC
+
+.select-none.select-none.select-none {
+  user-select: none;
+}
+
+.cursor-pointer.cursor-pointer.cursor-pointer {
+  cursor: pointer;
+}
+
+.hidden.hidden.hidden {
+  display: none;
+}
+
+.no-wrap.no-wrap.no-wrap {
+  white-space: nowrap;
+}
+
+.vertical-align-middle.vertical-align-middle.vertical-align-middle {
+  vertical-align: middle;
+}
+
+.height-full.height-full.height-full.height-full {
+  height: 100%;
+}
+
+.width-full.width-full.width-full.width-full {
+  width: 100%;
+}
+
+.greater-than-xs-hidden.greater-than-xs-hidden.greater-than-xs-hidden {
+  @media screen and (width > $xs) {
+    display: none;
+  }
+}
+
+.less-than-sm-hidden.less-than-sm-hidden.less-than-sm-hidden {
+  @media screen and (width < $sm) {
+    display: none;
+  }
+}
+

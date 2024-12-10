@@ -1,0 +1,125 @@
+@import '/src/shared/styles/breakpoints';
+
+.mainLayoutWrapper {
+  --h-header: 10rem;
+
+  display: grid;
+  height: 100%;
+  max-height: 100vh;
+  width: 100%;
+  grid-template:
+    'nav content chat' auto
+    'nav footer footer' min-content / min-content minmax(0, 3fr) 1fr;
+
+  &.mainLayoutWrapperWithoutChat {
+    grid-template:
+      'nav content content' auto
+      'nav footer footer' min-content / min-content minmax(0, 3fr) 1fr;
+  }
+
+  @media screen and (width < $lg) {
+    grid-template:
+      'nav content' auto
+      'nav footer' min-content / min-content minmax(0, auto);
+  }
+
+  @media screen and (width < $xs) {
+    grid-template:
+      'content' auto / auto
+      'footer' auto / auto;
+  }
+}
+
+.content {
+  grid-area: content;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentWrapper.contentWrapper {
+  min-height: 100vh;
+  padding-right: 2rem;
+  padding-top: 1rem;
+
+  @media screen and (width < $sm) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+.contentWrapperWithoutChat.contentWrapperWithoutChat {
+  margin: 0 auto;
+  max-width: 150rem;
+}
+
+.scrollArea {
+  & > :global(.rt-ScrollAreaScrollbar) {
+    opacity: 0.3;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  /* NOTE: tricky hack to make friends with the Radix and Swiper */
+  & > :global(.rt-ScrollAreaViewport > div) {
+    display: initial !important;
+  }
+}
+
+.chatOpenBtn.chatOpenBtn.chatOpenBtn {
+  border-radius: 50%;
+  cursor: pointer;
+
+  @media screen and (width < $lg) {
+    display: none;
+  }
+
+  @media screen and (width < $xs) {
+    display: initial;
+  }
+}
+
+.footer {
+  grid-area: footer;
+  padding: 2.5rem;
+  height: 38rem;
+  justify-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
+  @media screen and (width < $sm) {
+    padding: 2rem;
+    flex-direction: column;
+  }
+
+  .footerMainDescription {
+    // max-width: 62rem;
+    color: var(--gray-6);
+  }
+
+  .footerLink.footerLink {
+    color: var(--gray-8);
+    text-decoration: none;
+  }
+
+  .footerMainContainer {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4.5rem;
+
+    @media screen and (width < $sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .footerLinksContainer {
+    gap: 2.5rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 69rem; // 😉
+    width: 100%;
+
+    @media screen and (width < $sm) {
+      grid-template-columns: 1fr 1fr;
+      max-width: auto;
+    }
+  }
+}

@@ -1,0 +1,121 @@
+.graphWrapper.graphWrapper.graphWrapper {
+  grid-area: graph;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: calc(var(--b-radius) * 2);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  container-name: graph;
+  container-type: inline-size;
+
+  &::before {
+    box-shadow: none;
+  }
+
+  &.withPadding :global(.rt-CardInner) {
+    padding: 2rem;
+  }
+
+  &.bgBlack :global(.rt-CardInner) {
+    background-color: var(--gray-3);
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+  :global(.rt-CardInner) {
+    padding: 0;
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 60rem;
+    width: 100%;
+    gap: 1rem;
+  }
+}
+
+.priceGraphHeader {
+  flex: 0;
+}
+
+.chart {
+  width: 100%;
+  height: 100%;
+  max-height: 80rem;
+  flex: 1;
+
+  @container graph (width < 500px) {
+    max-height: 60rem;
+  }
+}
+
+.emptyGraph {
+  background-image: url('/src/shared/images/empty-chart-stub.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+
+  .emptyGraphLabel {
+    backdrop-filter: blur(20px) brightness(2);
+    border-radius: calc(var(--b-radius) * 2);
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+    padding: 3rem;
+    color: var(--white);
+    min-width: 50%;
+  }
+}
+
+.loadingAnimation {
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    display: block;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 50%;
+    border: 0.5rem solid var(--c-white-alpha-2);
+    border-color: var(--c-white-alpha-2) transparent;
+    animation: loader-ring 1.2s linear infinite;
+  }
+}
+
+.headerLabel {
+  color: var(--gray);
+}
+
+.assetPrice {
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes loader-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

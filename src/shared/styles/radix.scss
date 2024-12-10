@@ -1,0 +1,28 @@
+/* Radix components reassignments */
+.rt-TextFieldInput {
+  padding: 0.5rem 1.25rem;
+}
+
+.rt-BaseButton.rt-Button {
+  transition: background-color 0.2s ease-in-out;
+
+  &:disabled {
+    filter: brightness(0.6);
+    color: var(--black);
+  }
+}
+
+.rt-Card.rt-Card {
+  &::after {
+    box-shadow: none; // NOTE: remove a card border for the RadixCard component
+  }
+}
+
+.rt-DialogContent.rt-DialogContent {
+  background-color: var(--color-panel);
+  border-radius: calc(var(--b-radius) * 2);
+  overflow: auto;
+}
+.rt-DialogOverlay.rt-DialogOverlay::after {
+  backdrop-filter: blur(2rem);
+}

@@ -1,0 +1,22 @@
+{
+  "extends": ["stylelint-config-standard-scss"],
+  "basePath": "./src",
+  "defaultSeverity": "warning",
+  "ignoreFiles": "**/dist/**/*",
+  "rules": {
+    "string-quotes": "single",
+    "declaration-block-no-duplicate-properties": null,
+    "selector-class-pattern": null,
+    "unit-case": null,
+    "hue-degree-notation": null,
+    "color-function-notation": null,
+    "rule-empty-line-before": null,
+    "no-descending-specificity": null,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+export * from './asset-icons'
+export * from './background-element-icons'
+export * from './box-icons'
+export * from './third-party-icons'
+export * from './page-icons'
+export * from './util-icons'

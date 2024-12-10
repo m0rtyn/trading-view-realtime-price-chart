@@ -1,0 +1,43 @@
+@import '/src/shared/styles/breakpoints';
+
+.header {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+  z-index: 10;
+  height: var(--h-header);
+  box-sizing: border-box;
+  padding: 2rem;
+  margin-right: 1.5rem;
+  background-color: transparent;
+  backdrop-filter: blur(500px) brightness(0.8);
+  gap: 2.5rem;
+  width: 100%;
+  container-type: inline-size;
+  container-name: header;
+
+  @media screen and (width < $sm) {
+    margin-right: 0;
+    position: static;
+    padding: 2rem 0;
+    padding-right: 2rem;
+  }
+
+  .headerLogo {
+    @media screen and (width > $xs) {
+      display: none;
+    }
+  }
+
+  .headerIconContainer {
+    background-color: var(--gray-4);
+  }
+
+  .headerInfo {
+    @media screen and (width < $sm) {
+      display: none;
+    }
+  }
+}
