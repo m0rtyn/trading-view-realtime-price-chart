@@ -48,7 +48,7 @@ export const DynamicChart: React.FC<Props> = ({
 
   useAnimationFrame(updateChartFrameRef?.current)
 
-  useChartHistoricalData(chartInstanceRef, seriesInstanceRef, chartData.assetId)
+  // useChartHistoricalData(chartInstanceRef, seriesInstanceRef, chartData.assetId)
 
   useChartAnnotations(chartInstanceRef, seriesInstanceRef, annotations)
 
