@@ -1,0 +1,2020 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CoinDepositType {
+  id: Float!
+  type: String!
+  currency: String!
+  minimumAmount: String!
+  depositFeePercent: Float!
+  withdrawalFeePercent: Float!
+}
+
+type CoinRateType {
+  from: String!
+  to: String!
+  rate: Float!
+}
+
+type CoinType {
+  id: Float!
+  name: String!
+  rate: Float!
+  minimumAmount: Float!
+  depositFeePercent: Float!
+  withdrawalFeePercent: Float!
+}
+
+type DepositType {
+  currency: String!
+  address: String!
+}
+
+type TransactionType {
+  id: String!
+  txid: String!
+  createdAt: Timestamp!
+  confirmations: Float!
+  status: String!
+  error: String!
+  type: String!
+  currency: String!
+  amount: Float!
+  amountUsd: Float!
+  address: String!
+  fees: String!
+}
+
+type WithdrawCoinsAmountType {
+  currency: String!
+  name: String!
+  amount: Float!
+}
+
+type CoinAddressType {
+  currency: String!
+  address: String!
+}
+
+type TransactionState {
+  type: String!
+  currency: String!
+  amount: String!
+  amountUsd: String!
+  status: String!
+}
+
+type LedgerBalanceEntity {
+  id: String
+  amount: String!
+  accountId: String
+  createdAt: Timestamp
+}
+
+type PrivacyPolicyType {
+  id: String!
+  userId: String!
+  showProfile: Boolean!
+  showAchievements: Boolean!
+  showSetups: Boolean!
+  showStats: Boolean!
+  showBettingHistory: Boolean!
+  allowTagInChat: Boolean!
+  allowInviteIn1vs1Game: Boolean!
+}
+
+type EmailNotificationPolicyType {
+  id: String!
+  userId: String!
+  sendNotificationsToEmail: Boolean!
+  notifyBetsResult: Boolean!
+  notifyBettingInvitation: Boolean!
+  notifyNewAchievements: Boolean!
+  notifyUpdates: Boolean!
+}
+
+type User {
+  id: String!
+  request: [String!] @deprecated(reason: "Not used")
+  bio: String!
+  name: String!
+  avatarKeys: [String!]!
+  discordRoles: [String!]!
+  isInfluencer: Boolean!
+  avatarUris: [String!]!
+  discord: UserDiscordAccount
+  twitter: UserTwitterAccount
+  wallet: UserWalletAccount
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  avatarUris: [String!]!
+}
+
+type UserDiscordAccount {
+  id: String!
+  name: String!
+  roles: [String!]!
+}
+
+input AttachDiscordInput {
+  state: String!
+  code: String!
+  redirectUri: String!
+}
+
+input AttachTwitterInput {
+  state: String!
+  redirectUri: String!
+  code: String!
+}
+
+type UserTwitterAccount {
+  id: String!
+  name: String!
+}
+
+type UserWalletAccount {
+  address: String!
+}
+
+type Game {
+  id: String!
+  type: GameType!
+  assetId: String!
+  startAt: Timestamp
+  stopPredictAt: Timestamp
+  endAt: Timestamp
+  startPrice: Float
+  endPrice: Float
+  timeframe: String!
+  state: GameState!
+  bets: [Bet!]!
+}
+
+"""
+The supported game types.
+"""
+enum GameType {
+  ONEVSONE
+  SETUP
+  BULLSEYE
+  UPDOWN
+}
+
+"""
+The supported game states.
+"""
+enum GameState {
+  DRAFT
+  OPEN
+  INPROGRESS
+  PENDING
+  CLOSE
+}
+
+type AnalyticBet {
+  id: String!
+  gameId: String!
+  ownerId: String!
+  type: BetType!
+  amount: Float
+  fee: Float
+  pnl: Float
+  result: BetState!
+  outcome: Float
+  price: Float
+  isUp: Boolean
+  priceResult: Float
+  isUpResult: Boolean
+  createdAt: Timestamp!
+  multiplier: Float!
+  owner: User
+  gameType: GameType!
+}
+
+type Bet {
+  id: String!
+  gameId: String!
+  gameType: GameType!
+  ownerId: String!
+  type: BetType!
+  amount: Float!
+  fee: Float
+  pnl: Float
+  result: BetState!
+  outcome: Float
+  price: Float
+  isUp: Boolean
+  priceResult: Float
+  isUpResult: Boolean
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  multiplier: Float!
+  game: Game!
+  owner: User
+}
+
+type Bets {
+  total: Int!
+  skip: Int!
+  take: Int!
+  bets: [Bet!]!
+}
+
+"""
+The supported bet types.
+"""
+enum BetType {
+  PRICE
+  UPDOWN
+}
+
+"""
+The supported bet states.
+"""
+enum BetState {
+  WON
+  LOSS
+  REJECT
+  PENDING
+  INPROGRESS
+  OPEN
+}
+
+"""
+The supported predict statuses.
+"""
+enum PredictStatus {
+  WON
+  LOSS
+  REJECT
+  OPEN
+}
+
+type CountActiveBettors {
+  bullseye: Int!
+  updown: Int!
+  setup: Int!
+  onevsone: Int!
+}
+
+type OneVsOneGamesCountType {
+  activeGamesCount: Int!
+  closeGamesCount: Int!
+  inviteGamesCount: Int!
+}
+
+type SetupGamesCountType {
+  activeGamesCount: Int!
+  closeGamesCount: Int!
+}
+
+type UpDownGame {
+  id: String!
+  gameType: GameType!
+  feedId: String!
+  startAt: Timestamp
+  stopPredictAt: Timestamp
+  endAt: Timestamp
+  startPrice: Float
+  endPrice: Float
+  timeframe: Int
+  status: GameStatus!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  isUp: Boolean
+  myPredict: UpDownPredict
+  upPool: UpDownGamePoolInfo!
+  downPool: UpDownGamePoolInfo!
+}
+
+"""
+The supported game statuses.
+"""
+enum GameStatus {
+  OPEN
+  CLOSE
+  REJECT
+}
+
+type UpDownPredicts {
+  skip: Int!
+  take: Int!
+}
+
+type UpDownPredict {
+  id: String!
+  gameId: String!
+  gameType: GameType!
+  ownerId: String!
+  status: PredictStatus!
+  amount: Float!
+  createdAt: Timestamp!
+  outcome: Float!
+  pnl: Float!
+  updatedAt: Timestamp!
+  isLong: Boolean!
+  game: UpDownGame
+  owner: User
+}
+
+"""
+The supported predict statuses.
+"""
+enum PredictStatus {
+  WON
+  LOSS
+  REJECT
+  OPEN
+}
+
+type UpDownBet {
+  id: String!
+  gameId: String!
+  ownerId: String!
+  type: BetType!
+  amount: Float
+  fee: Float
+  pnl: Float
+  result: BetState!
+  outcome: Float
+  price: Float
+  isUp: Boolean
+  priceResult: Float
+  isUpResult: Boolean
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  multiplier: Float!
+  game: UpDownGame
+  owner: User
+}
+
+type UpDownGamePoolInfo {
+  predictsCount: Float!
+  poolAmount: Float!
+  predicts: [UpDownPredict!]!
+}
+
+type Asset {
+  id: String!
+  name: String!
+  precision: Float!
+  feedId: String!
+  price: AssetPrice!
+  last7days: [AssetPrice!]!
+  price24h: AssetPrice!
+}
+
+type AssetPrice {
+  assetId: String!
+  feedId: String!
+  formattedValue: Float!
+  timestamp: Float!
+  nativeFee: String!
+  linkFee: String!
+  expiresAt: Float!
+  payload: String!
+  id: String
+}
+
+type OneVsOneGame {
+  id: String!
+  type: GameType!
+  assetId: String!
+  startAt: Timestamp
+  stopPredictAt: Timestamp
+  endAt: Timestamp
+  startPrice: Float
+  endPrice: Float
+  timeframe: String!
+  state: GameState!
+  ownerId: String!
+  opponentId: String
+  isPrivate: Boolean!
+  isExact: Boolean!
+  direction: OneVsOneBetDirectionType!
+  owner: User!
+  opponent: User
+  bets: [OneVsOneBet!]!
+  ownerBet: OneVsOneBet!
+  opponentBet: OneVsOneBet
+}
+
+"""
+The supported directions types.
+"""
+enum OneVsOneBetDirectionType {
+  UP
+  DOWN
+}
+
+type OneVsOneBet {
+  id: String!
+  gameId: String!
+  gameType: GameType!
+  ownerId: String!
+  type: BetType!
+  amount: Float!
+  fee: Float
+  pnl: Float
+  result: BetState!
+  outcome: Float
+  price: Float
+  isUp: Boolean
+  priceResult: Float
+  isUpResult: Boolean
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  multiplier: Float!
+  game: OneVsOneGame
+  owner: User!
+}
+
+type SetupPredict {
+  id: String!
+  gameId: String!
+  gameType: GameType!
+  ownerId: String!
+  status: PredictStatus!
+  amount: Float!
+  createdAt: Timestamp!
+  outcome: Float!
+  pnl: Float!
+  updatedAt: Timestamp!
+  isLong: Boolean!
+  game: SetupGame!
+  owner: User!
+}
+
+type SetupPredicts {
+  total: Int!
+    @deprecated(
+      reason: "This field will not be filled in with data and will soon be removed from the schema"
+    )
+  skip: Int!
+  take: Int!
+  predicts: [SetupPredict!]!
+}
+
+type SetupGamePoolInfo {
+  poolAmount: Float!
+  predictsCount: Float!
+  multiplier: Float!
+}
+
+type SetupGameResultNotificationPayload {
+  gameType: GameType!
+  amount: Float
+  outcome: Float
+  status: PredictStatus!
+}
+
+type UpDownGameResultNotificationPayload {
+  gameType: GameType!
+
+  """
+  Initial bet amount
+  """
+  amount: Float
+
+  """
+  The amount of money that was won or lost in the game
+  """
+  outcome: Float
+
+  result: BetState!
+}
+
+type BullseyeGamePoolInfo {
+  betsCount: Float!
+  poolAmount: Float!
+}
+
+type BullseyeGame {
+  id: String!
+  gameType: GameType!
+  feedId: String!
+  startAt: Timestamp
+  stopPredictAt: Timestamp
+  endAt: Timestamp
+  startPrice: Float
+  endPrice: Float
+  timeframe: Int
+  status: GameStatus!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  amount: Float!
+  myPredict: BullseyePredict
+  predicts: [BullseyePredict!]!
+  pool: BullseyeGamePoolInfo!
+}
+
+"""
+The supported games.
+"""
+enum GameType {
+  ONEVSONE
+  BULLSEYE
+  SETUP
+  UPDOWN
+}
+
+"""
+The supported game statuses.
+"""
+enum GameStatus {
+  OPEN
+  CLOSE
+  REJECT
+}
+
+"""
+The supported predict statuses.
+"""
+enum PredictStatus {
+  WON
+  LOSS
+  REJECT
+  OPEN
+}
+
+type BullseyePredict {
+  id: String!
+  gameId: String!
+  gameType: GameType!
+  ownerId: String!
+  status: PredictStatus!
+  amount: Float!
+  createdAt: Timestamp!
+  outcome: Float!
+  pnl: Float!
+  updatedAt: Timestamp!
+  price: Float!
+  place: Int!
+  game: BullseyeGame
+  owner: User
+  isExact: Boolean
+}
+
+type BullseyeGamePoolInfo {
+  predictsCount: Float!
+  poolAmount: Float!
+}
+
+input SetupPredictFilters {
+  status: [PredictStatus!]
+}
+
+type BullsEyeBetsCounters {
+  active: Float!
+  closed: Float!
+}
+
+type Message {
+  id: String!
+  text: Markdown!
+  sender: User
+  roomId: String!
+  replyTo: Message
+  createdAt: Timestamp!
+}
+
+type UserAnalyticInfoType {
+  name: String!
+  avatarUrl: String
+  avatarKey: String
+}
+
+type TodaysBiggestWin {
+  name: String!
+  avatarUrl: String
+  avatarKey: String
+  pnl: String!
+}
+
+type TodaysBetsState {
+  todaysBiggestWin: TodaysBiggestWin
+  numberOfPoolsParticipants: Int!
+  totalPoolSize: Int!
+}
+
+type UserBetsStatistic {
+  totalBets: Int!
+  totalBetsAmount: Float!
+  winrate: Float!
+  largestWin: Float!
+}
+
+type TopPlayersByWinrate {
+  position: Int!
+  winratePercentage: String!
+  user: UserAnalyticInfoType!
+}
+
+type TopPlayersByUsers {
+  position: Int!
+  profit: String!
+  user: UserAnalyticInfoType!
+}
+
+type GlobalBetsStatistics {
+  countDailyClosedGames: Int!
+}
+
+type WinrateDiagramType {
+  intervals: Timestamp!
+  winrate: Int!
+}
+
+type GamesWinrateDiagramType {
+  upDown: [WinrateDiagramType!]!
+  setup: [WinrateDiagramType!]!
+  bullsEye: [WinrateDiagramType!]!
+  oneVsOne: [WinrateDiagramType!]!
+  average: [WinrateDiagramType!]!
+}
+
+type Notification {
+  id: String!
+  type: String!
+  content: Markdown!
+  isRead: Boolean!
+  createdAt: Timestamp!
+}
+
+"""
+Date custom scalar type
+"""
+scalar Timestamp
+
+"""
+Markdown custom scalar type
+"""
+scalar Markdown
+
+type Query {
+  getCurrentBullseyeGame: BullseyeGame!
+  checkNameAvailability(data: CheckNameAvailabilityInput!): Boolean!
+  getTwitterAuthUri(data: GetTwitterAuthUriInput!): String!
+  getDiscordAuthUri(data: GetDiscordAuthUriInput!): String!
+  me: User!
+  findOpponents(data: FindUsersInput!): [User!]!
+  findChatMembers(data: FindUsersInput!): [User!]!
+  getMetamaskChallenge(data: GetMetamaskChallengeInput!): MetamaskChallenge!
+  getUserById(userId: String!): User
+  getTwitterAuthUri(data: GetTwitterAuthUriInput!): String!
+  getDiscordAuthUri(data: GetDiscordAuthUriInput!): String!
+  getPrivacyPolicies: PrivacyPolicyType!
+  getNotificationsPolicies: EmailNotificationPolicyType!
+  coinList: [CoinDepositType!]!
+  coinRates: [CoinRateType!]!
+  coinAndRates: [CoinType!]!
+  listTransactions(data: ListTransactionsInput!): [TransactionType!]!
+  listCoinAddresses: [DepositType!]!
+  getWithdrawCoinsAmount(
+    data: WithdrawCoinsAmountInput!
+  ): [WithdrawCoinsAmountType!]!
+  getUserBalance: Balance!
+  getOneVsOneUpDownGames(
+    filters: OneVsOneUpDownGameFilters!
+    pagination: PaginatedInput!
+  ): OneVsOneUpDownGames!
+  getOneVsOneExactPriceGames(
+    filters: OneVsOneExactPriceGameFilters!
+    pagination: PaginatedInput!
+  ): OneVsOneExactPriceGames!
+  getOwnOneVsOneUpDownGames(
+    filters: OneVsOneUpDownGameFilters!
+    pagination: PaginatedInput!
+  ): OneVsOneUpDownGames!
+  getOwnOneVsOneExactPriceGames(
+    filters: OneVsOneExactPriceGameFilters!
+    pagination: PaginatedInput!
+  ): OneVsOneExactPriceGames!
+  getOneVsOneUpDownGame(id: String!): OneVsOneUpDownGame!
+  getOneVsOneExactPriceGame(id: String!): OneVsOneExactPriceGame!
+  getUserBalanceOperations(
+    input: GetBalanceOperationsInput!
+  ): BalanceOperations!
+  getUserBalanceHistory(input: GetBalanceHistoryInput!): [Balance!]!
+  getUserBets(data: GetBetsInput!): Bets!
+  getUpDownGame(gameId: String!): UpDownGame!
+  getCurrentUpDownGame: UpDownGame!
+  getUpDownGames(data: UpDownGamesFilterPaginatedInput!): [UpDownGame!]!
+  getUserUpDownPredicts(data: PaginatedInput!): UpDownPredicts!
+  listAssets: [Asset!]!
+  assetPayload: [AssetPrice]!
+  assetPrices(data: AssetPricesInput!): [AssetPrice!]!
+  priceRange(data: AssetPricesRangeInput!): [AssetPrice!]!
+  getAvailableGlobalOneVsOneGames(
+    data: OneVsOneGamesFilterPaginatedInput!
+  ): [OneVsOneGame!]!
+  getAvailablePersonalOneVsOneGames(
+    data: OneVsOneGamesFilterPaginatedInput!
+  ): [OneVsOneGame!]!
+  getOneVsOneGame(id: String!): OneVsOneGame
+  getOwnOneVsOneGames(
+    data: OneVsOneGamesFilterPaginatedInput!
+  ): [OneVsOneGame!]!
+  getOneVsOneGamesCount: OneVsOneGamesCountType!
+  getSetupGamesCount: SetupGamesCountType!
+  getLatestWinningSetupPredicts(
+    data: SetupPredictsPaginatedInput!
+  ): [SetupPredict!]!
+  getTopMonthSetupers: TopMonthSetupers!
+  getSetupGames(
+    filters: SetupGameFilters!
+    pagination: PaginatedInput!
+  ): SetupGames!
+  getSetupPredicts(id: String!, pagination: PaginatedInput!): SetupPredicts!
+  getSetupGame(id: String!): SetupGame!
+  resolveSetupPredict(gameId: String!, ownerId: String!): SetupPredict!
+  getUserSetupGames(
+    filters: SetupGameFilters!
+    pagination: PaginatedInput!
+  ): SetupGames!
+  getUserSetupPredicts(
+    filters: SetupPredictFilters!
+    pagination: PaginatedInput!
+  ): SetupPredicts!
+  getBullsEyeBetsCounters: BullsEyeBetsCounters!
+  getRoomMessagesPaginated(data: GetRoomMessages!): Messages!
+  getGlobalRoom: Room!
+  getUserBetsStatistic(data: GetUserBetsStatisticInput!): UserBetsStatistic!
+  getUserGamesWinratesHistory(
+    data: GetWinrateDiagramInput!
+  ): UserGamesWinratesHistory!
+  getTodaysBullsEyeBetsState: TodaysBetsState!
+  getWinrateDiagram(data: WinrateDiagramInputType!): GamesWinrateDiagramType!
+  getNotifications(data: PaginatedInput!): NotificationsPaginated!
+  getUserBalanceHistory(input: GetBalanceHistoryInput!): [Balance!]!
+  getCurrentOnline: Float!
+  getLastLuckyBets: [Bet!]!
+  getLastHighWagerBets: [Bet!]!
+  getLastHighestPnlBets: [Bet!]!
+  getSetupGameResult(data: GetSetupGameResultInput!): SetupGameResult!
+  getUnreadNotificationsCount: Int!
+  getReferral: Referral!
+  getReferralStatistic: ReferralStatistic!
+  checkReferralAvalability(data: CheckReferralAvalabilityInput!): Referral!
+  getCurrentBullseyeGame: BullseyeGame!
+  getUserSeasonState: Season!
+  getUserReward: Reward!
+  getTopUsersRewards(pagination: PaginatedInput!): TopUsersRewards!
+  getUserByAddress(address: String!): User!
+  getLastClosedUpDownGames: UpDownGames!
+  getUserBullseyePredicts(data: PaginatedInput!): BullseyePredicts!
+  getUserDailyTasks: DailyTasks!
+  getLiveWinsPredicts(pagination: PaginatedInput!): Predicts!
+  getUserSetupPredictsStatistic(userId: String!): UserSetupPredictsStatistic!
+  getUserSetupGamesStatistic(userId: String!): UserSetupGamesStatistic!
+  getUserOneVsOneExactPricePredictsStatistic(
+    userId: String!
+  ): UserOneVsOneExactPricePredictsStatistic!
+  getUserUpDownPredictsStatistic(userId: String!): UserUpDownPredictsStatistic!
+  getUserBullseyePredictsStatistic(
+    userId: String!
+  ): UserBullseyePredictsStatistic!
+}
+
+type TopUsersRewards {
+  skip: Int!
+  take: Int!
+
+  """
+  This field is not filled in for all types. Please check with the backend team before using this field.
+  """
+  total: Int
+  rewards: [Reward!]!
+  myReward: Reward!
+}
+
+type UserOneVsOneExactPricePredictsStatistic {
+  totalGames: Int!
+  totalWins: Int!
+  winPercentage: Float!
+  earned: Float
+}
+
+type UserSetupGamesStatistic {
+  totalPlayersOnGames: Int!
+  totalGames: Int!
+  earned: Float
+  totalTakeProfitClosedGames: Int!
+  totalTakeProfitClosedGamesPercentage: Float
+  totalStopLossClosedGames: Int!
+  totalStopLossClosedGamesPercentage: Float
+  totalRejectedGames: Int!
+  totalRejectedGamesPercentage: Float
+}
+
+type UserSetupPredictsStatistic {
+  totalGames: Int!
+  totalWins: Int!
+  winPercentage: Float!
+  earned: Float
+}
+
+type UserUpDownPredictsStatistic {
+  totalGames: Int!
+  totalWins: Int!
+  winPercentage: Float!
+  earned: Float
+}
+type UserBullseyePredictsStatistic {
+  totalGames: Int!
+  totalWins: Int!
+  winPercentage: Float!
+  earned: Float
+}
+
+type Messages {
+  prevToken: String
+  nextToken: String
+  messages: [Message!]!
+}
+
+type Predicts {
+  skip: Int!
+  take: Int!
+  predicts: [Predict!]!
+}
+
+type Predict {
+  id: String!
+  gameId: String!
+  gameType: GameType!
+  ownerId: String!
+  status: PredictStatus!
+  amount: Float!
+  createdAt: Timestamp!
+  outcome: Float!
+  pnl: Float!
+  updatedAt: Timestamp!
+  game: Game!
+  owner: User!
+}
+
+type DailyTasks {
+  tasks: [ChallengeTask!]!
+}
+
+type UpDownGames {
+  skip: Int!
+  take: Int!
+  games: [UpDownGame!]!
+}
+
+type UpDownPredicts {
+  skip: Int!
+  take: Int!
+  predicts: [UpDownPredict!]!
+}
+
+type BullseyePredicts {
+  skip: Int!
+  take: Int!
+  predicts: [BullseyePredict!]!
+}
+
+input GetSetupPredictsInput {
+  skip: Int = 0
+  take: Int = 5
+  isActive: Boolean = true
+}
+
+type Season {
+  id: String!
+  name: String!
+  description: String!
+  challenges: [SeasonChallenge!]!
+  countCompletedChallegnes: Int!
+}
+
+type SeasonChallenge {
+  id: String!
+  name: String!
+  description: String!
+  number: Int!
+  tasks: [ChallengeTask!]!
+}
+
+type ChallengeTask {
+  id: String!
+  name: String!
+  description: String
+  number: Int!
+  reward: Float
+  userRelatedTask: UserChallengeTask
+}
+
+type UserChallengeTask {
+  id: String!
+  status: UserChallengeTaskStatus!
+}
+
+type Reward {
+  id: String!
+  rewards: Float!
+  referralRewards: Float!
+  lastPlace: Int
+  currentPlace: Int
+  user: User
+  placeChange: Int
+  rewardsForChallenges: Float!
+  lastPlaceOnLeaderboard: Int!
+}
+
+enum UserChallengeTaskStatus {
+  NOT_COMPLETED
+  COMPLETED
+  CLAIMED
+}
+
+type Referral {
+  code: String!
+  user: User
+  active: Boolean!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  referrer: User
+}
+
+type ReferralStatistic {
+  numberOfInvited: Int!
+  numberOfSecondLevelInvited: Int!
+}
+
+input CheckReferralAvalabilityInput {
+  code: String!
+}
+
+type UserGamesWinratesHistory {
+  upDown: [WinrateDiagramItem!]!
+  setup: [WinrateDiagramItem!]!
+  bullsEye: [WinrateDiagramItem!]!
+  oneVsOne: [WinrateDiagramItem!]!
+  average: [WinrateDiagramItem!]!
+}
+
+input GetWinrateDiagramInput {
+  userId: String!
+  period: WinrateDiagramSupportedTime!
+  intervals: Int = 30
+}
+
+"""
+Supported time periodes for winrate diagram
+"""
+enum WinrateDiagramSupportedTime {
+  DAY
+  WEEK
+  MONTH
+  TREEMONTH
+  YEAR
+}
+
+type WinrateDiagramItem {
+  intervals: Timestamp!
+  winrate: Float!
+}
+
+type NotificationsPaginated {
+  skip: Int!
+  take: Int!
+  notifications: [Notification!]!
+}
+
+input MarkNotificationsAsReadInput {
+  ids: [String!]
+}
+
+input GetSetupGameResultInput {
+  gameId: String!
+}
+
+input GetTwitterAuthUriInput {
+  redirectUri: String!
+}
+
+type SetupGameResult {
+  game: SetupGame!
+  predicts: [SetupPredict!]!
+  myPredict: SetupPredict
+  myBetPosition: Int!
+}
+
+input GetBullseyeGameResultInput {
+  gameId: String!
+}
+
+input GetOwnBullsEyeBetsInput {
+  skip: Int = 0
+  take: Int = 5
+  isActive: Boolean! = true
+}
+
+type OneVsOneExactPriceGame {
+  asset: Asset!
+  updatedAt: Timestamp!
+  timeframe: Int
+  stopPredictAt: Timestamp
+  status: GameStatus!
+  startPrice: Float
+  startAt: Timestamp
+  ownerPredict: OneVsOneExactPricePredict!
+  ownerId: String!
+  owner: User!
+  opponent: User
+  opponentPredict: OneVsOneExactPricePredict
+  opponentId: String
+  isPrivate: Boolean!
+  id: String!
+  gameType: GameType!
+  gameSubtype: OneVsOneGameType!
+  feedId: String!
+  endPrice: Float
+  endAt: Timestamp
+  createdAt: Timestamp!
+}
+
+type OneVsOneExactPriceGames {
+  games: [OneVsOneExactPriceGame!]!
+  skip: Int!
+  take: Int!
+}
+
+type OneVsOneExactPricePredict {
+  amount: Float!
+  createdAt: Timestamp!
+  game: OneVsOneExactPriceGame!
+  gameId: String!
+  gameSubtype: OneVsOneGameType!
+  gameType: GameType!
+  id: String!
+  outcome: Float!
+  owner: User!
+  ownerId: String!
+  pnl: Float!
+  price: Float!
+  status: PredictStatus!
+  updatedAt: Timestamp!
+}
+
+type OneVsOneUpDownPredict {
+  amount: Float!
+  createdAt: Timestamp!
+  game: OneVsOneUpDownGame!
+  gameId: String!
+  gameSubtype: OneVsOneGameType!
+  gameType: GameType!
+  id: String!
+  isLong: Boolean!
+  outcome: Float!
+  owner: User!
+  ownerId: String!
+  pnl: Float!
+  status: PredictStatus!
+  updatedAt: Timestamp!
+}
+
+type OneVsOneUpDownGame {
+  asset: Asset!
+  updatedAt: Timestamp!
+  timeframe: Int
+  stopPredictAt: Timestamp
+  status: GameStatus!
+  startPrice: Float
+  startAt: Timestamp
+  ownerPredict: OneVsOneUpDownPredict!
+  ownerId: String!
+  owner: User!
+  opponentPredict: OneVsOneUpDownPredict
+  opponent: User
+  opponentId: String
+  isPrivate: Boolean!
+  isLong: Boolean
+  id: String!
+  gameType: GameType!
+  gameSubtype: OneVsOneGameType!
+  feedId: String!
+  endPrice: Float
+  endAt: Timestamp
+  createdAt: Timestamp!
+}
+
+type OneVsOneUpDownGames {
+  games: [OneVsOneUpDownGame!]!
+  skip: Int!
+  take: Int!
+}
+
+input OneVsOneUpDownGameFilters {
+  isPrivate: Boolean!
+  status: [GameStatus!]
+  isAccepted: Boolean
+}
+
+input OneVsOneExactPriceGameFilters {
+  isPrivate: Boolean!
+  status: [GameStatus!]
+  isAccepted: Boolean
+}
+
+enum PredictStatus {
+  LOSS
+  OPEN
+  REJECT
+  WON
+}
+
+enum OneVsOneGameType {
+  EXACT_PRICE
+  UPDOWN
+}
+
+enum GameStatus {
+  OPEN
+  CLOSE
+  REJECT
+}
+
+type BullsEyeBets {
+  total: Int!
+  skip: Int!
+  take: Int!
+  bets: [BullsEyeBet!]!
+}
+
+type BullsEyeBet {
+  id: String!
+  gameId: String!
+  ownerId: String!
+  type: BetType!
+  amount: Float
+  fee: Float
+  pnl: Float
+  result: BetState!
+  outcome: Float
+  price: Float
+  isUp: Boolean
+  priceResult: Float
+  isUpResult: Boolean
+  createdAt: Timestamp!
+  game: BullseyeGame
+  owner: User
+}
+
+type Room {
+  id: String!
+}
+
+input GetMetamaskChallengeInput {
+  walletAddress: String!
+}
+
+type MetamaskChallenge {
+  challenge: String!
+  walletHasAnyNft: Boolean!
+}
+
+input FindUsersInput {
+  name: String
+  skip: Float! = 0
+  take: Float! = 20
+}
+
+input ListTransactionsInput {
+  type: String
+  skip: Float! = 0
+  take: Float! = 20
+}
+
+input WithdrawCoinsAmountInput {
+  amount: Float!
+}
+
+input FilteredBalancesInput {
+  startDate: Timestamp
+  endDate: Timestamp
+}
+
+input BetsFilterPaginatedInput {
+  skip: Float = 0
+  take: Float = 5
+  betMin: Float
+  betMax: Float
+  profitMin: Float
+  profitMax: Float
+  latest: Boolean
+  isActive: Boolean
+}
+
+input UpDownGamesFilterPaginatedInput {
+  skip: Float = 0
+  take: Float = 5
+}
+
+input UpDownBetsFilterPaginatedInput {
+  skip: Float = 0
+  take: Float = 5
+  betMin: Float
+  betMax: Float
+  profitMin: Float
+  profitMax: Float
+  latest: Boolean
+  isActive: Boolean
+}
+
+input AssetPricesInput {
+  assetId: String!
+  take: Float!
+  skip: Float!
+}
+
+input AssetPricesRangeInput {
+  assetId: String!
+  startDate: DateTime!
+  endDate: DateTime!
+}
+
+input OneVsOneGamesFilterPaginatedInput {
+  skip: Float = 0
+  take: Float = 5
+  isOpen: Boolean = true
+}
+
+input SetupPredictsFilterPaginatedInput {
+  skip: Float = 0
+  take: Float = 5
+  betMin: Float
+  betMax: Float
+  profitMin: Float
+  profitMax: Float
+  latest: Boolean
+  isActive: Boolean
+}
+
+input SetupGamesFilterPaginatedInput {
+  skip: Int = 0
+  take: Int = 5
+  isActive: Boolean = true
+}
+
+type SetupGameState {
+  id: String!
+  isTrusted: Boolean
+  state: String!
+  startPrice: Float
+  endPrice: Float
+  stopPredictAt: Timestamp
+  endAt: Timestamp
+  startAt: Timestamp
+  takeProfitPool: SetupGameStatePoolInfo!
+  stopLossPool: SetupGameStatePoolInfo!
+  maxMultiplier: Float!
+}
+
+type SetupGameStatePoolInfo {
+  amount: Float!
+  count: Float!
+  multiplier: Float!
+}
+
+"""
+The supported lists of games.
+"""
+enum GamesListType {
+  FINISHING
+  HIGH_MULTIPLIERS
+  INFLUENCERS
+}
+
+input GamesFilterPaginatedInput {
+  skip: Float = 0
+  take: Float = 5
+}
+
+input SetupPredictsPaginatedInput {
+  skip: Float = 0
+  take: Float = 5
+}
+
+input BullseyeGamesFilterPaginatedInput {
+  skip: Float = 0
+  take: Float = 5
+  isActive: Boolean
+}
+
+input BullsEyeBetsPaginatedInput {
+  skip: Float = 0
+  take: Float = 5
+}
+
+"""
+The supported order directions.
+"""
+enum OrderBy {
+  asc
+  desc
+}
+
+input GetRoomMessagesInputType {
+  roomId: String!
+  skip: Float!
+  take: Float!
+}
+
+input GetRoomMessages {
+  paginationToken: String
+  roomId: String!
+}
+
+input GetSystemRoomMessagesInputType {
+  skip: Float!
+  take: Float!
+}
+
+input WinrateDiagramInputType {
+  period: String!
+  intervals: Float = 30
+}
+
+input ListNotificationsInput {
+  betCreation: Boolean = true
+  acceptingBet: Boolean = true
+  incomingBet: Boolean = true
+  winningBet: Boolean = true
+  losingBet: Boolean = true
+  mentions: Boolean = true
+  achivements: Boolean = true
+  news: Boolean = true
+  skip: Float = 0
+  take: Float = 7
+}
+
+type Mutation {
+  claimReward(data: ClaimRewardInput!): UserChallengeTask!
+  verifyTwitter(data: OAuthTwitterInput!): String!
+  verifyMetamaskSignature(data: VerifyMetamaskSignatureInput!): String!
+  signout: String
+  updateAvatar(file: Upload!): User!
+  updateUser(data: UpdateUserInput!): User!
+  deleteAvatar: User!
+  deleteAccount(data: DeleteAccountInput!): User
+  updatePrivacyPolicy(changes: ChangePrivacyPolicyInput!): PrivacyPolicyType!
+  updateNotificationsPolicy(
+    changes: ChangeEmailNotificationPolicyInput!
+  ): EmailNotificationPolicyType!
+  createCoinAddress(data: GetCoinAddressInput!): CoinAddressType!
+  withdrawal(data: WithdrawalInput!): String!
+  createDeposit(input: CreatePaymentOperation!): LedgerBalanceEntity
+  createWithdraw(input: CreatePaymentOperation!): LedgerBalanceEntity
+  addUpDownBet(data: AddUpDownBetInput!): UpDownBet!
+  createOneVsOneGame(data: CreateOneVsOneGameInput!): OneVsOneGame!
+  addOneVsOneBet(data: AddOneVsOneBetInput!): OneVsOneBet!
+  rejectOneVsOneGameInvitation(gameId: String!): OneVsOneGame!
+  rejectOneVsOneGame(gameId: String!): OneVsOneGame!
+  createSetupGame(data: CreateSetupGameInput!): SetupGame!
+  addSetupPredict(data: AddSetupPredictInput!): SetupPredict!
+  sendMessage(data: SendMessageInput!): Message!
+  markAllAsRead: Float!
+  markNotificationsRead(data: MarkNotificationsAsReadInput!): Void
+  attachDiscord(data: AttachDiscordInput!): Void!
+  attachTwitter(data: AttachTwitterInput!): Void!
+  attachWallet(data: AttachWalletInput!): Void!
+  checkChallengeTaskCompletion(
+    data: CheckChallengeTaskCompletionInput!
+  ): Season!
+  updateReferral(data: UpdateReferralInput!): Referral!
+}
+
+input UpdateReferralInput {
+  code: String!
+}
+
+type Referral {
+  code: String!
+  user: User
+  active: Boolean!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  referrer: User
+}
+
+input AttachWalletInput {
+  walletAddress: String!
+  signature: String!
+}
+
+input CheckChallengeTaskCompletionInput {
+  id: String!
+}
+
+input ClaimRewardInput {
+  id: String!
+}
+
+type Message {
+  id: String!
+  text: Markdown!
+  senderId: String!
+  sender: User
+  roomId: String!
+  replyToId: String
+  replyTo: Message
+  createdAt: Timestamp!
+}
+
+"""
+Represents NULL values
+"""
+scalar Void
+
+input SendMessageInput {
+  text: Markdown!
+  roomId: String!
+  replyToId: String
+}
+
+input OAuthTwitterInput {
+  oauthToken: String!
+  oauthVerifier: String!
+}
+
+input OAuth2DiscordInput {
+  state: String!
+  code: String!
+}
+
+input VerifyMetamaskSignatureInput {
+  username: String
+  referrerId: String
+  walletAddress: String!
+  signature: String!
+}
+
+"""
+The `Upload` scalar type represents a file upload.
+"""
+scalar Upload
+
+input UpdateUserInput {
+  name: String
+  bio: String
+  password: String
+}
+
+input DeleteAccountInput {
+  reason: String!
+}
+
+input ChangePrivacyPolicyInput {
+  showProfile: Boolean
+  showAchievements: Boolean
+  showSetups: Boolean
+  showStats: Boolean
+  showBettingHistory: Boolean
+  allowTagInChat: Boolean
+  allowInviteIn1vs1Game: Boolean
+}
+
+input ChangeEmailNotificationPolicyInput {
+  sendNotificationsToEmail: Boolean
+  notifyBetsResult: Boolean
+  notifyBettingInvitation: Boolean
+  notifyNewAchievements: Boolean
+  notifyUpdates: Boolean
+}
+
+input GetCoinAddressInput {
+  currency: String!
+}
+
+input WithdrawalInput {
+  amountUsd: Float!
+  currency: String!
+  address: String!
+}
+
+input CreatePaymentOperation {
+  amount: Float!
+}
+
+input AddUpDownBetInput {
+  gameId: String!
+  isUp: Boolean!
+  amount: Float!
+}
+
+input CreateOneVsOneGameInput {
+  assetId: String!
+  timeframe: Float!
+  isPrivate: Boolean!
+  isExact: Boolean!
+  direction: OneVsOneBetDirectionType
+  opponentId: String
+  betAmount: Float!
+  betPrice: Float
+}
+
+input AddOneVsOneBetInput {
+  gameId: String!
+  price: Float
+}
+
+input CreateSetupGameInput {
+  assetId: String!
+  timeframe: Float!
+  isLong: Boolean!
+  takeProfit: Float!
+  stopLoss: Float!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input AddSetupPredictInput {
+  gameId: String!
+  takeProfit: Boolean!
+  amount: Float!
+}
+
+input AddBullsEyeBetInput {
+  gameId: String!
+  price: Float!
+}
+
+input BullsEyeBetsFilterPaginatedInput {
+  skip: Float = 0
+  take: Float = 5
+  betMin: Float
+  betMax: Float
+  profitMin: Float
+  profitMax: Float
+  latest: Boolean
+  isActive: Boolean
+}
+
+input MessageInputType {
+  text: Markdown!
+  roomId: String!
+}
+
+type Subscription {
+  setupGameChanged(gameId: String!): SetupGame!
+  setupGameCreated: SetupGame!
+  rewardChanged: Reward!
+  userSeasonChanged: Season!
+  getTransactionsState: TransactionState!
+  upDownGameChanged: UpDownGame!
+  updatedBalance: Balance!
+  assetPriceChanged(assetId: String!): AssetPrice!
+  oneVsOneGameState(gameId: String!): OneVsOneGameState!
+  bullseyeGameChanged: BullseyeGame!
+  roomMessages(roomId: String!): MessageState!
+  online: Float!
+  luckyBetsStream: Bet!
+  highWagerBetsStream: Bet!
+  highestPnlBetsStream: Bet!
+  notifications: Notification!
+  createdOneVsOneGame: OneVsOneGame!
+  oneVsOneUpDownGameCreated: OneVsOneUpDownGame!
+  oneVsOneExactPriceGameCreated: OneVsOneExactPriceGame!
+  oneVsOneExactPriceGamesChanged: OneVsOneExactPriceGame!
+  userDailyTasksChanged: [ChallengeTask!]!
+  oneVsOneUpDownGameChanged: OneVsOneExactPriceGame!
+  oneVsOneExactPriceGameChanged(gameId: String!): OneVsOneExactPriceGame!
+  liveWinsPredicts: Predict!
+}
+
+input PaginatedInput {
+  skip: Int = 0
+  take: Int = 5
+}
+
+"""
+Supported notifications
+"""
+union Notification =
+  | MentionNotification
+  | GameResultNotification
+  | BonusNotification
+  | HotNotification
+
+type BonusNotification {
+  id: String!
+  userId: String!
+  type: NotificationType!
+  isRead: Boolean!
+  createdAt: Timestamp!
+  title: String!
+  description: String
+  amount: Float!
+  assetId: String!
+}
+
+type GameResultNotification {
+  id: String!
+  userId: String!
+  type: NotificationType!
+  isRead: Boolean!
+  createdAt: Timestamp!
+  payload: GameResultNotificationPayload!
+}
+
+type MentionNotification {
+  id: String!
+  userId: String!
+  type: NotificationType!
+  isRead: Boolean!
+  createdAt: Timestamp!
+  messageId: String!
+}
+
+enum NotificationType {
+  gameResult
+  bonus
+  mention
+}
+
+type HotNotification {
+  id: String!
+  type: NotificationType!
+  createdAt: Timestamp!
+  userId: String!
+  updatedAt: Timestamp!
+  isRead: Boolean!
+}
+
+"""
+Supported game result notifications
+"""
+union GameResultNotificationPayload =
+  | OneVsOneExactPriceGameResultNotificationPayload
+  | OneVsOneUpDownGameResultNotificationPayload
+  | OneVsOneGameResultNotificationPayload
+  | BullseyeGameResultNotificationPayload
+  | SetupGameResultNotificationPayload
+  | UpDownGameResultNotificationPayload
+
+type OneVsOneGameResultNotificationPayload {
+  gameType: GameType!
+  amount: Float
+  outcome: Float
+  result: BetState!
+  opponent: User
+}
+
+type OneVsOneExactPriceGameResultNotificationPayload {
+  gameType: GameType!
+  gameSubtype: OneVsOneGameType!
+  amount: Float
+  outcome: Float
+  status: PredictStatus!
+  opponent: User
+}
+
+type OneVsOneUpDownGameResultNotificationPayload {
+  gameType: GameType!
+  gameSubtype: OneVsOneGameType!
+  amount: Float
+  outcome: Float
+  status: PredictStatus!
+  opponent: User
+}
+
+type BullseyeGameResultNotificationPayload {
+  gameType: GameType!
+  amount: Float
+  outcome: Float
+  status: PredictStatus!
+  winner: User
+  winnerOutcome: Float
+  isExact: Boolean
+}
+
+type SetupGameResultNotificationPayload {
+  gameType: GameType!
+  amount: Float
+  outcome: Float
+  result: BetState!
+}
+
+type UpDownGameResultNotificationPayload {
+  gameType: GameType!
+  amount: Float
+  outcome: Float
+  status: PredictStatus!
+}
+
+type SetupGame {
+  id: String!
+  gameType: GameType!
+  feedId: String!
+  startAt: Timestamp
+  stopPredictAt: Timestamp
+  endAt: Timestamp
+  startPrice: Float
+  endPrice: Float
+  timeframe: Int
+  status: GameStatus!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  isLong: Boolean!
+  stopLoss: Float!
+  takeProfit: Float!
+  ownerProfit: Float
+  ownerId: String!
+  myPredict: SetupPredict
+  owner: User!
+  takeProfitPool: SetupGamePoolInfo!
+  stopLossPool: SetupGamePoolInfo!
+  asset: Asset!
+}
+
+"""
+The supported OneVsOne games subtypes.
+"""
+enum OneVsOneGameType {
+  EXACT_PRICE
+  UPDOWN
+}
+
+"""
+The supported Setup game results.
+"""
+enum GameSetupResult {
+  REJECTED
+  STOP_LOSS
+  TAKE_PROFIT
+}
+
+input CurrentAssetPriceInput {
+  assetId: String!
+}
+
+type MessageState {
+  id: String!
+  text: String!
+  roomId: String!
+  createdAt: Timestamp!
+  tagList: [String!]!
+  sender: User
+  replyTo: Message
+}
+
+type Balance {
+  id: String!
+  accountId: String!
+  amount: Float!
+  createdAt: Timestamp!
+}
+
+type BalanceOperation {
+  type: BalanceOperationType!
+  details: String!
+  amount: Float!
+  date: DateTime
+}
+
+type BalanceOperations {
+  total: Float!
+  skip: Float!
+  take: Float!
+  operations: [BalanceOperation!]!
+}
+
+"""
+The supported balance operations types.
+"""
+enum BalanceOperationType {
+  networkFee
+  hold
+  unhold
+  bonus
+  bonusRemoved
+  userDeposit
+  userWithdraw
+  hourlyFee
+  userAddBet
+  gameResolve
+  userRejectedBet
+  userWon
+  userLose
+  notDefined
+}
+
+input GetBalanceHistoryInput {
+  startDate: DateTime
+  endDate: DateTime
+}
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type OneVsOneGameState {
+  id: String!
+  assetId: String!
+  timeframe: Float!
+  state: String!
+  startPrice: Float!
+  endPrice: Float
+  stopPredictAt: Timestamp!
+  endAt: Timestamp!
+  startAt: Timestamp!
+}
+
+input GetBalanceOperationsInput {
+  skip: Float = 0
+  take: Float = 5
+  type: BalanceOperationType
+  gameMode: GameType
+}
+
+input GetBetsInput {
+  skip: Int = 0
+  take: Int = 5
+  betMin: Float
+  betMax: Float
+  profitMin: Float
+  profitMax: Float
+  latest: Boolean
+  isActive: Boolean
+}
+
+"""
+Supported game result notifications
+"""
+union GameResultNotificationPayload =
+  | OneVsOneExactPriceGameResultNotificationPayload
+  | OneVsOneUpDownGameResultNotificationPayload
+  | BullseyeGameResultNotificationPayload
+  | SetupGameResultNotificationPayload
+  | UpDownGameResultNotificationPayload
+
+type TopMonthSetupers {
+  topByWinrate: [TopSetuperByWinrate!]!
+  topByUsers: [TopSetuperByUsers!]!
+}
+
+type TopSetuperByUsers {
+  position: Int!
+  profit: Float!
+  user: User
+}
+
+type TopSetuperByWinrate {
+  position: Int!
+  winratePercentage: Float!
+  user: User
+}
+
+input CheckNameAvailabilityInput {
+  name: String!
+}
+
+input GetDiscordAuthUriInput {
+  redirectUri: String!
+}
+
+input GetUserBetsStatisticInput {
+  userId: String!
+}
+
+input GetTwitterAuthUriInput {
+  redirectUri: String!
+}
+
+input SetupGameFilters {
+  status: [GameStatus!]
+}
+
+type SetupGames {
+  skip: Int!
+  take: Int!
+  games: [SetupGame!]!
+}
+
+type OneVsOneExactPriceGame {
+  id: String!
+  isAccepted: Boolean!
+  gameType: GameType!
+  feedId: String!
+  startAt: Timestamp
+  stopPredictAt: Timestamp
+  endAt: Timestamp
+  startPrice: Float
+  endPrice: Float
+  timeframe: Int
+  status: GameStatus!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  ownerId: String!
+  opponentId: String
+  gameSubtype: OneVsOneGameType!
+  isPrivate: Boolean!
+  predictAmount: Float!
+  owner: User!
+  opponent: User
+  ownerPredict: OneVsOneExactPricePredict!
+  opponentPredict: OneVsOneExactPricePredict
+}
+
+type OneVsOneUpDownGame {
+  id: String!
+  isAccepted: Boolean!
+  gameType: GameType!
+  feedId: String!
+  startAt: Timestamp
+  stopPredictAt: Timestamp
+  endAt: Timestamp
+  startPrice: Float
+  endPrice: Float
+  timeframe: Int
+  status: GameStatus!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  ownerId: String!
+  opponentId: String
+  gameSubtype: OneVsOneGameType!
+  isPrivate: Boolean!
+  predictAmount: Float!
+  isLong: Boolean
+  owner: User!
+  opponent: User
+  ownerPredict: OneVsOneUpDownPredict!
+  opponentPredict: OneVsOneUpDownPredict
+}
+
+type OneVsOneUpDownPredict {
+  id: String!
+  gameId: String!
+  gameType: GameType!
+  ownerId: String!
+  status: PredictStatus!
+  amount: Float!
+  createdAt: Timestamp!
+  outcome: Float!
+  pnl: Float!
+  updatedAt: Timestamp!
+  gameSubtype: OneVsOneGameType!
+  isLong: Boolean!
+  game: OneVsOneUpDownGame!
+  owner: User!
+}
+
+type OneVsOneExactPricePredict {
+  id: String!
+  gameId: String!
+  gameType: GameType!
+  ownerId: String!
+  status: PredictStatus!
+  amount: Float!
+  createdAt: Timestamp!
+  outcome: Float!
+  pnl: Float!
+  updatedAt: Timestamp!
+  gameSubtype: OneVsOneGameType!
+  price: Float!
+  game: OneVsOneExactPriceGame!
+  owner: User!
+}
+
+input TimestampFilterInput {
+  equals: Timestamp
+  gt: Timestamp
+  gte: Timestamp
+  lt: Timestamp
+  lte: Timestamp
+}
+
+input OneVsOneExactPriceGameFilters {
+  isPrivate: Boolean
+  status: [GameStatus!]
+  opponentId: String
+  stopPredictAt: TimestampFilterInput
+}
+
+input OneVsOneUpDownGameFilters {
+  isPrivate: Boolean
+  status: [GameStatus!]
+  opponentId: String
+  stopPredictAt: TimestampFilterInput
+}
+
+type OneVsOneExactPriceGames {
+  skip: Int!
+  take: Int!
+  games: [OneVsOneExactPriceGame!]!
+}
+
+type OneVsOneUpDownGames {
+  skip: Int!
+  take: Int!
+  games: [OneVsOneUpDownGame!]!
+}
