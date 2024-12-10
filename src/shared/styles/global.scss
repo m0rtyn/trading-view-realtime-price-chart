@@ -1,10 +1,3 @@
-@use './colors';
-@use './typography';
-@use './sizes';
-@use './radix';
-@use './util-classes';
-@use './shared.scss';
-@import '/src/shared/styles/breakpoints';
 
 /* NOTE: theming https://www.radix-ui.com/themes/docs/theme/token-reference#modifying-tokens */
 .radix-themes {
@@ -25,26 +18,6 @@
 }
 
 html {
-  font-size: 6px; /* NOTE: initial mobile font size, equals to 1rem */
-  max-width: 100vw;
-  overflow-x: hidden;
-  overscroll-behavior-y: none; /* to fix weird extra scroll on iOS devices */
-
-  @media screen and (width > $xs) {
-    font-size: 7px;
-  }
-
-  @media screen and (width > $lg) {
-    font-size: 8px;
-  }
-
-  @media screen and (width > $xxl) {
-    font-size: 9px;
-  }
-
-  @media screen and (width > $xxxl) {
-    font-size: 10px;
-  }
 
   &::-webkit-scrollbar {
     width: 1rem;
@@ -79,7 +52,6 @@ body {
   font-size: 2rem;
   margin: 0;
   width: 100vw;
-  height: 100vh;
   overflow: hidden;
 }
 

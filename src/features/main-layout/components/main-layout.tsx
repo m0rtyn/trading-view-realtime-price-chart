@@ -22,18 +22,10 @@ export const MainLayout: React.FC = () => {
   const isChatOpened = useReactiveVar(isChatOpenedVar)
 
   return (
-    <div
-      className={cn(styles.mainLayoutWrapper, {
-        [styles.mainLayoutWrapperWithoutChat]: isEmptyPage || !isChatVisible
-      })}
-    >
+    <div className={cn(styles.mainLayoutWrapper)}>
       <main className={styles.content}>
         <Flex
-          className={cn(styles.contentWrapper, {
-            [styles.contentWrapperWithoutChat]: !isChatOpened
-          })}
-          pr={{ initial: '0', md: '4' }}
-          pt={{ initial: '0', md: '2' }}
+          className={cn(styles.contentWrapper)}
           direction={'column'}
           gap='4'
         >

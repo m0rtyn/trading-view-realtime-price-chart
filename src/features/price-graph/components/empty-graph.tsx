@@ -18,11 +18,11 @@ export const EmptyGraph: React.FC<Props> = ({
   secondaryText,
   customChartBGClassname
 }) => {
-  const currentTitle = title ? title : 'Select asset to see graph'
-  const currentSecondaryText =
-    secondaryText ? secondaryText : (
-      'Choose a cryptocurrency token (e.g., Bitcoin).'
-    )
+  const currentTitle = title ? title : 'Reload page to see graph'
+  // const currentSecondaryText =
+  //   secondaryText ? secondaryText : (
+  //     'Choose a cryptocurrency token (e.g., Bitcoin).'
+  //   )
   return (
     <Flex
       align='center'
@@ -50,7 +50,7 @@ export const EmptyGraph: React.FC<Props> = ({
           {loading ? 'Loading...' : currentTitle}
         </Heading>
 
-        {!loading && <Text size='2'>{currentSecondaryText}</Text>}
+        {/* {!loading && <Text size='2'>{currentSecondaryText}</Text>} */}
       </Flex>
     </Flex>
   )

@@ -5,7 +5,6 @@ export const DevPage: React.FC = () => {
   return (
     <>
       <Flex
-        style={{ minHeight: '87.5rem' }}
         height={'100%'}
         width={'100%'}
         direction='column'

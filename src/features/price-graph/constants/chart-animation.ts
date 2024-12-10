@@ -7,7 +7,7 @@ import { Milliseconds } from 'shared/types'
  */
 const DATA_FREQ_MS = 1000 as Milliseconds
 /** how many points request for the initial chart */
-export const QUERY_DATA_SIZE = 30
+export const QUERY_DATA_SIZE = 60
 /** To ensure equality of the data density and the data update frequency, should be more than 900 */
 export const DATA_MULTIPLIER = 33
 

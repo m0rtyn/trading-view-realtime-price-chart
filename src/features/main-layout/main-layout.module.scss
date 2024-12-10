@@ -3,31 +3,12 @@
 .mainLayoutWrapper {
   --h-header: 10rem;
 
-  display: grid;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   max-height: 100vh;
   width: 100%;
-  grid-template:
-    'nav content chat' auto
-    'nav footer footer' min-content / min-content minmax(0, 3fr) 1fr;
-
-  &.mainLayoutWrapperWithoutChat {
-    grid-template:
-      'nav content content' auto
-      'nav footer footer' min-content / min-content minmax(0, 3fr) 1fr;
-  }
-
-  @media screen and (width < $lg) {
-    grid-template:
-      'nav content' auto
-      'nav footer' min-content / min-content minmax(0, auto);
-  }
-
-  @media screen and (width < $xs) {
-    grid-template:
-      'content' auto / auto
-      'footer' auto / auto;
-  }
+  grid-template: 1fr/1fr;
 }
 
 .content {
@@ -38,14 +19,9 @@
 }
 
 .contentWrapper.contentWrapper {
+  padding: 3rem 5rem;
+  box-sizing: border-box;
   min-height: 100vh;
-  padding-right: 2rem;
-  padding-top: 1rem;
-
-  @media screen and (width < $sm) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
 }
 
 .contentWrapperWithoutChat.contentWrapperWithoutChat {
